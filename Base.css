@@ -1,0 +1,632 @@
+/* =========================================================
+   PULSE OS
+   BASE / RESET / VARIABLES
+========================================================= */
+
+:root {
+    --bg: #05070a;
+    --bg-soft: #0a0e14;
+
+    --surface: rgba(12, 17, 24, 0.78);
+    --surface-light: rgba(255, 255, 255, 0.045);
+
+    --border: rgba(255, 255, 255, 0.09);
+    --border-gold: rgba(212, 175, 55, 0.3);
+
+    --text: #f1f5f9;
+    --text-soft: #94a3b8;
+    --text-muted: #64748b;
+
+    --gold: #d4af37;
+    --gold-light: #f4d76b;
+
+    --cyan: #22d3ee;
+    --green: #34d399;
+    --blue: #60a5fa;
+    --purple: #c084fc;
+    --red: #fb7185;
+
+    --radius: 16px;
+
+    --font-main:
+        "Vazirmatn",
+        sans-serif;
+
+    --font-code:
+        "JetBrains Mono",
+        monospace;
+
+    --shadow:
+        0 25px 80px rgba(0, 0, 0, 0.55);
+
+    --transition:
+        180ms ease;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+
+body {
+    overflow: hidden;
+
+    background: var(--bg);
+
+    color: var(--text);
+
+    font-family: var(--font-main);
+
+    -webkit-font-smoothing: antialiased;
+}
+
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+
+button {
+    border: 0;
+    cursor: pointer;
+}
+
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   CANVAS
+========================================================= */
+
+#pulseCanvas {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+.background-overlay {
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 1;
+
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(212, 175, 55, 0.035),
+            transparent 45%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(5, 7, 10, 0.2),
+            rgba(5, 7, 10, 0.75)
+        );
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(212, 175, 55, 0.35);
+}
+
+
+/* =========================================================
+   SELECTION
+========================================================= */
+
+::selection {
+    color: #05070a;
+    background: var(--gold);
+}
+
+
+/* =========================================================
+   UTILITIES
+========================================================= */
+
+.hidden {
+    display: none !important;
+}
+
+
+.no-select {
+    user-select: none;
+}
+
+/* =========================================================
+   MOBILE + FIRST-TIME GUIDE
+   ========================================================= */
+
+/* First-time guide */
+.pulse-guide {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity 0.2s ease,
+        visibility 0.2s ease;
+}
+
+.pulse-guide.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.pulse-guide__card {
+    position: relative;
+
+    width: min(430px, 100%);
+    max-height: min(620px, calc(100vh - 40px));
+
+    overflow-y: auto;
+
+    padding: 28px;
+
+    border: 1px solid rgba(212, 175, 55, 0.28);
+    border-radius: 18px;
+
+    background: rgba(10, 14, 20, 0.92);
+
+    box-shadow:
+        0 20px 70px rgba(0, 0, 0, 0.45),
+        0 0 30px rgba(0, 220, 255, 0.05);
+
+    color: #eee;
+}
+
+.pulse-guide__icon {
+    margin-bottom: 8px;
+
+    color: #d4af37;
+    font-size: 34px;
+    line-height: 1;
+}
+
+.pulse-guide__card h2 {
+    margin: 0 0 10px;
+}
+
+.pulse-guide__card p {
+    margin: 0 0 16px;
+    opacity: 0.8;
+}
+
+.pulse-guide__card ul {
+    margin: 0;
+    padding-inline-start: 20px;
+}
+
+.pulse-guide__card li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.pulse-guide__close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+
+    width: 42px;
+    height: 42px;
+
+    border: 0;
+    background: transparent;
+
+    color: #aaa;
+    font-size: 28px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.pulse-guide__close:hover {
+    color: #fff;
+}
+
+.pulse-guide__button {
+    width: 100%;
+    min-height: 46px;
+
+    margin-top: 18px;
+
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    border-radius: 10px;
+
+    background: rgba(212, 175, 55, 0.1);
+    color: #d4af37;
+
+    cursor: pointer;
+
+    font: inherit;
+}
+
+.pulse-guide__button:hover {
+    background: rgba(212, 175, 55, 0.18);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    /* Keep desktop icons visible and separated */
+    .desktop-icons {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(80px, 1fr));
+        align-content: start;
+
+        gap: 16px;
+
+        width: min(220px, calc(100vw - 32px));
+
+        padding: 20px;
+
+        box-sizing: border-box;
+    }
+
+    /* Comfortable touch targets */
+    .desktop-icon {
+        min-width: 76px;
+        min-height: 76px;
+
+        touch-action: manipulation;
+    }
+
+    /* Windows become almost full-screen */
+    .window {
+        position: fixed !important;
+
+        top: 8px !important;
+        left: 8px !important;
+
+        width: calc(100vw - 16px) !important;
+        max-width: none !important;
+
+        height: calc(100dvh - 78px) !important;
+        max-height: calc(100dvh - 78px) !important;
+
+        margin: 0 !important;
+
+        box-sizing: border-box;
+    }
+
+    /* Keep title bars usable */
+    .window-titlebar {
+        min-height: 48px;
+
+        touch-action: none;
+    }
+
+    .window-titlebar button,
+    .window-controls button {
+        min-width: 42px;
+        min-height: 42px;
+
+        touch-action: manipulation;
+    }
+
+    /* Allow content to scroll naturally */
+    .window-content {
+        min-height: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Keep dock inside viewport */
+    .taskbar,
+    .dock {
+        left: 8px !important;
+        right: 8px !important;
+        bottom: 8px !important;
+
+        width: auto !important;
+        max-width: none !important;
+
+        box-sizing: border-box;
+    }
+
+    .taskbar button,
+    .dock button {
+        min-width: 44px;
+        min-height: 44px;
+
+        touch-action: manipulation;
+    }
+
+    /* Guide */
+    .pulse-guide {
+        padding: 12px;
+    }
+
+    .pulse-guide__card {
+        max-height: calc(100dvh - 24px);
+        padding: 24px 20px;
+    }
+}
+
+
+/* Small phones */
+@media (max-width: 420px) {
+
+    .desktop-icons {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+
+        padding: 14px;
+    }
+
+    .desktop-icon {
+        min-width: 70px;
+        min-height: 70px;
+    }
+
+    .window {
+        top: 4px !important;
+        left: 4px !important;
+
+        width: calc(100vw - 8px) !important;
+        height: calc(100dvh - 70px) !important;
+        max-height: calc(100dvh - 70px) !important;
+    }
+}
+
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .pulse-guide,
+    .pulse-guide__button {
+        transition: none;
+    }
+}
+
+/* =========================================================
+   PULSE OS - ENHANCED THEMES / SKINS
+========================================================= */
+
+/* Matrix Green Theme */
+body.theme-matrix {
+    --bg: #030a06;
+    --bg-soft: #06140c;
+    --gold: #10b981;
+    --gold-light: #34d399;
+    --cyan: #059669;
+    --border: rgba(16, 185, 129, 0.25);
+    --border-gold: rgba(52, 211, 153, 0.5);
+}
+body.theme-matrix .background-overlay {
+    background: 
+        radial-gradient(circle at 50% 40%, rgba(16, 185, 129, 0.1), transparent 45%),
+        linear-gradient(180deg, rgba(3, 10, 6, 0.2), rgba(3, 10, 6, 0.9));
+}
+
+/* Cyber Neon Theme */
+body.theme-cyber {
+    --bg: #06050f;
+    --bg-soft: #0d0a1a;
+    --gold: #38bdf8;
+    --gold-light: #7dd3fc;
+    --cyan: #c084fc;
+    --border: rgba(56, 189, 248, 0.25);
+    --border-gold: rgba(192, 132, 252, 0.5);
+}
+body.theme-cyber .background-overlay {
+    background: 
+        radial-gradient(circle at 50% 40%, rgba(192, 132, 252, 0.1), transparent 45%),
+        linear-gradient(180deg, rgba(6, 5, 15, 0.2), rgba(6, 5, 15, 0.9));
+}
+
+/* =========================================================
+   PULSE OS - EXTENDED ULTIMATE THEMES
+========================================================= */
+
+/* 1. Matrix Green Theme */
+body.theme-matrix {
+    --bg: #030a06;
+    --bg-soft: #06140c;
+    --gold: #10b981;
+    --gold-light: #34d399;
+    --cyan: #059669;
+    --text: #ecfdf5;
+    --text-soft: #a7f3d0;
+    --text-muted: #047857;
+    --border: rgba(16, 185, 129, 0.25);
+    --border-gold: rgba(52, 211, 153, 0.5);
+}
+
+/* 2. Cyber Neon Theme */
+body.theme-cyber {
+    --bg: #06050f;
+    --bg-soft: #0d0a1a;
+    --gold: #38bdf8;
+    --gold-light: #7dd3fc;
+    --cyan: #c084fc;
+    --text: #f0f9ff;
+    --text-soft: #bae6fd;
+    --text-muted: #0369a1;
+    --border: rgba(56, 189, 248, 0.25);
+    --border-gold: rgba(192, 132, 252, 0.5);
+}
+
+/* 3. Light Minimal Theme (تم سفید و شفاف) */
+body.theme-light {
+    --bg: #f8fafc;
+    --bg-soft: #f1f5f9;
+    --surface: rgba(255, 255, 255, 0.85);
+    --surface-light: rgba(0, 0, 0, 0.04);
+    --gold: #2563eb; /* آبی پررنگ شیک به جای طلایی */
+    --gold-light: #3b82f6;
+    --cyan: #0284c7;
+    --text: #0f172a;
+    --text-soft: #334155;
+    --text-muted: #64748b;
+    --border: rgba(15, 23, 42, 0.12);
+    --border-gold: rgba(37, 99, 235, 0.35);
+}
+body.theme-light .background-overlay {
+    background: 
+        radial-gradient(circle at 50% 40%, rgba(37, 99, 235, 0.05), transparent 50%),
+        linear-gradient(180deg, rgba(248, 250, 252, 0.5), rgba(241, 245, 249, 0.95));
+}
+body.theme-light .app-window {
+    background: rgba(255, 255, 255, 0.92);
+    color: #0f172a;
+}
+
+/* 4. Pure OLED Dark Theme (تم مشکی خالص) */
+body.theme-oled {
+    --bg: #000000;
+    --bg-soft: #080808;
+    --surface: rgba(12, 12, 12, 0.9);
+    --gold: #f3f4f6;
+    --gold-light: #ffffff;
+    --cyan: #9ca3af;
+    --text: #ffffff;
+    --text-soft: #e5e7eb;
+    --text-muted: #6b7280;
+    --border: rgba(255, 255, 255, 0.15);
+    --border-gold: rgba(255, 255, 255, 0.4);
+}
+body.theme-oled .background-overlay {
+    background: rgba(0, 0, 0, 0.85);
+}
+
+/* 5. Sunset Crimson Theme (تم قرمز نئون) */
+body.theme-crimson {
+    --bg: #0d0305;
+    --bg-soft: #1a060a;
+    --gold: #f43f5e;
+    --gold-light: #fb7185;
+    --cyan: #fb923c;
+    --text: #fff1f2;
+    --text-soft: #fecdd3;
+    --text-muted: #be123c;
+    --border: rgba(244, 63, 94, 0.25);
+    --border-gold: rgba(244, 63, 94, 0.5);
+}
+
+/* 6. Deep Space Violet Theme (تم بنفش لوکس) */
+body.theme-violet {
+    --bg: #0a0512;
+    --bg-soft: #130a24;
+    --gold: #a855f7;
+    --gold-light: #c084fc;
+    --cyan: #ec4899;
+    --text: #faf5ff;
+    --text-soft: #e9d5ff;
+    --text-muted: #7e22ce;
+    --border: rgba(168, 85, 247, 0.25);
+    --border-gold: rgba(168, 85, 247, 0.5);
+}
+
+/* =========================================================
+   NEW THEMES: PURE MINIMAL & WINDOWS 7 AERO
+========================================================= */
+
+/* 1. Pure Minimal (کاملاً مشکی بدون بَک‌گراند) */
+body.theme-pure-dark {
+    --bg-main: #000000;
+    --cyan: #ffffff;
+    --gold: #888888;
+    --border: rgba(255, 255, 255, 0.15);
+    --border-gold: rgba(255, 255, 255, 0.2);
+    --text: #ffffff;
+    --text-muted: #666666;
+}
+
+body.theme-pure-dark #pulseCanvas,
+body.theme-pure-dark .background-overlay {
+    display: none !important; /* حذف کاملاً کانواس و پس‌زمینه */
+}
+
+/* 2. Windows 7 Aero (استایل ویندوز 7) */
+body.theme-win7 {
+    --bg-main: #0b1d3a;
+    --cyan: #38bdf8;
+    --gold: #60a5fa;
+    --border: rgba(96, 165, 250, 0.3);
+    --border-gold: rgba(0, 120, 215, 0.5);
+    --text: #e0f2fe;
+    --text-muted: #93c5fd;
+}
+
+body.theme-win7 .taskbar {
+    background: rgba(10, 30, 60, 0.75) !important;
+    backdrop-filter: blur(25px) saturate(180%);
+    border-top: 1px solid rgba(147, 197, 253, 0.4) !important;
+    box-shadow: 0 -5px 20px rgba(0, 80, 180, 0.3);
+}
+
+body.theme-win7 .app-window {
+    background: rgba(12, 28, 52, 0.85) !important;
+    border: 1px solid rgba(96, 165, 250, 0.4) !important;
+    box-shadow: 0 10px 30px rgba(0, 40, 100, 0.5);
+}

@@ -1,0 +1,476 @@
+/* =========================================================
+   PULSE OS
+   BOOT INTRO
+   EXACT DURATION: 5 SECONDS
+========================================================= */
+
+/* =========================================================
+   PAGE LOCK
+========================================================= */
+
+html.boot-lock,
+body.boot-lock {
+    overflow: hidden !important;
+}
+
+/* =========================================================
+   BOOT OVERLAY
+========================================================= */
+
+#boot-intro {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 999999;
+
+    display: grid;
+
+    place-items: center;
+
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+
+    overflow: hidden;
+
+    isolation: isolate;
+
+    color: #f4f7fb;
+
+    background:
+        radial-gradient(
+            circle at 50% 42%,
+            rgba(212, 175, 55, 0.09),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 50% 60%,
+            rgba(0, 220, 255, 0.055),
+            transparent 42%
+        ),
+
+        #05080c;
+
+    font-family:
+        "JetBrains Mono",
+        monospace;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 600ms
+        cubic-bezier(.22, 1, .36, 1);
+}
+
+/* =========================================================
+   ACTIVE
+========================================================= */
+
+#boot-intro.is-active {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transition:
+        opacity 180ms ease;
+}
+
+/* =========================================================
+   EXIT
+========================================================= */
+
+#boot-intro.is-leaving {
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 600ms
+        cubic-bezier(.22, 1, .36, 1);
+}
+
+/* =========================================================
+   GRID
+========================================================= */
+
+#boot-intro::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            rgba(255, 255, 255, 0.018) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.018) 1px,
+            transparent 1px
+        );
+
+    background-size: 38px 38px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            transparent,
+            black 20%,
+            black 80%,
+            transparent
+        );
+
+    opacity: 0.3;
+}
+
+/* =========================================================
+   GLOW
+========================================================= */
+
+.boot-intro__glow {
+    position: absolute;
+
+    width:
+        min(55vw, 620px);
+
+    aspect-ratio: 1 / 1;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(212, 175, 55, 0.09),
+            rgba(0, 220, 255, 0.03) 35%,
+            transparent 68%
+        );
+
+    filter: blur(12px);
+
+    pointer-events: none;
+
+    animation:
+        bootGlowPulse
+        2.5s
+        ease-in-out
+        infinite;
+}
+
+@keyframes bootGlowPulse {
+
+    0%,
+    100% {
+        transform: scale(0.96);
+
+        opacity: 0.65;
+    }
+
+    50% {
+        transform: scale(1.04);
+
+        opacity: 1;
+    }
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.boot-intro__content {
+    position: relative;
+
+    z-index: 2;
+
+    width:
+        min(
+            560px,
+            calc(100vw - 40px)
+        );
+
+    padding:
+        34px 32px;
+
+    border:
+        1px solid
+        rgba(212, 175, 55, 0.16);
+
+    border-radius: 16px;
+
+    background:
+        rgba(8, 12, 17, 0.78);
+
+    box-shadow:
+        0 28px 80px
+        rgba(0, 0, 0, 0.55),
+
+        inset 0 1px
+        rgba(255, 255, 255, 0.045);
+
+    backdrop-filter:
+        blur(24px);
+
+    -webkit-backdrop-filter:
+        blur(24px);
+}
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.boot-intro__brand {
+    width: fit-content;
+
+    color: #d4af37;
+
+    font-size:
+        clamp(
+            26px,
+            4vw,
+            36px
+        );
+
+    font-weight: 700;
+
+    letter-spacing: 0.28em;
+
+    opacity: 0;
+
+    transform:
+        translateY(10px)
+        scale(0.97);
+
+    text-shadow:
+        0 0 20px
+        rgba(212, 175, 55, 0.28);
+
+    transition:
+        opacity 650ms ease,
+
+        transform 650ms
+        cubic-bezier(.22, 1, .36, 1);
+}
+
+.boot-intro__brand.is-visible {
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+/* =========================================================
+   TERMINAL
+========================================================= */
+
+.boot-intro__terminal {
+    display: grid;
+
+    gap: 9px;
+
+    min-height: 48px;
+
+    margin-top: 28px;
+
+    color: #8e99a8;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+/* =========================================================
+   TERMINAL LINE
+========================================================= */
+
+.boot-intro__line {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    min-height: 18px;
+
+    opacity: 0;
+
+    transform:
+        translateY(5px);
+
+    transition:
+        opacity 400ms ease,
+
+        transform 400ms
+        cubic-bezier(.22, 1, .36, 1);
+}
+
+.boot-intro__line.is-visible {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+/* =========================================================
+   PROMPT
+========================================================= */
+
+.boot-intro__prompt {
+    color: #00dcff;
+
+    text-shadow:
+        0 0 10px
+        rgba(0, 220, 255, 0.4);
+
+    flex-shrink: 0;
+}
+
+/* =========================================================
+   PROGRESS CONTAINER
+========================================================= */
+
+.boot-intro__progress {
+    position: relative;
+
+    width: 100%;
+
+    height: 2px;
+
+    margin-top: 28px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+}
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.boot-intro__progress span {
+    display: block;
+
+    width: 0;
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #d4af37,
+            #ffffff,
+            #00dcff
+        );
+
+    box-shadow:
+        0 0 14px
+        rgba(212, 175, 55, 0.5);
+}
+
+/* =========================================================
+   COMPLETE
+========================================================= */
+
+.boot-intro__progress.is-complete {
+    animation:
+        bootBarPulse
+        350ms
+        ease-in-out;
+}
+
+.boot-intro__progress.is-complete span {
+    box-shadow:
+        0 0 26px
+        rgba(212, 175, 55, 0.9),
+
+        0 0 42px
+        rgba(0, 220, 255, 0.3);
+}
+
+@keyframes bootBarPulse {
+
+    0% {
+        transform:
+            scaleY(1);
+    }
+
+    50% {
+        transform:
+            scaleY(2);
+    }
+
+    100% {
+        transform:
+            scaleY(1);
+    }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .boot-intro__content {
+        width:
+            calc(100vw - 28px);
+
+        padding:
+            28px 22px;
+
+        border-radius: 14px;
+    }
+
+    .boot-intro__brand {
+        font-size: 26px;
+    }
+
+    .boot-intro__terminal {
+        font-size: 10px;
+    }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+/*
+   IMPORTANT:
+   Reduced Motion now removes visual animations,
+   BUT DOES NOT SHORTEN THE 5 SECOND BOOT.
+*/
+
+@media (prefers-reduced-motion: reduce) {
+
+    .boot-intro__glow {
+        animation: none;
+    }
+
+    .boot-intro__brand,
+    .boot-intro__line {
+        transition: none;
+    }
+
+    .boot-intro__progress.is-complete {
+        animation: none;
+    }
+}

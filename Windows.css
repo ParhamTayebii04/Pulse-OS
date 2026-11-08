@@ -1,0 +1,781 @@
+/* =========================================================
+   WINDOWS
+========================================================= */
+
+.app-window {
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+
+    width: min(760px, calc(100vw - 40px));
+    height: min(560px, calc(100vh - 120px));
+
+    display: none;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background:
+        rgba(10, 15, 22, 0.88);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+
+    box-shadow:
+        var(--shadow),
+        inset 0 1px rgba(255, 255, 255, 0.05);
+
+    transform: translate(-50%, -50%);
+
+    z-index: 100;
+
+    animation: windowOpen 180ms ease;
+}
+
+
+.app-window.open {
+    display: flex;
+}
+
+
+@keyframes windowOpen {
+
+    from {
+        opacity: 0;
+        transform:
+            translate(-50%, -48%)
+            scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
+}
+
+
+/* =========================================================
+   TITLE BAR
+========================================================= */
+
+.window-titlebar {
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 12px 0 16px;
+
+    flex-shrink: 0;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    border-bottom: 1px solid var(--border);
+
+    cursor: grab;
+
+    user-select: none;
+}
+
+
+.window-titlebar:active {
+    cursor: grabbing;
+}
+
+
+.window-title {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    color: var(--text-soft);
+
+    font-family: var(--font-code);
+    font-size: 11px;
+}
+
+
+.window-icon {
+    color: var(--gold);
+}
+
+
+.window-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
+.window-btn {
+    width: 28px;
+    height: 28px;
+
+    display: grid;
+    place-items: center;
+
+    color: var(--text-muted);
+
+    background: transparent;
+
+    border-radius: 7px;
+
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+
+    transition:
+        color var(--transition),
+        background var(--transition);
+}
+
+
+.window-btn:hover {
+    color: var(--text);
+
+    background:
+        rgba(255, 255, 255, 0.07);
+}
+
+
+.window-btn.close:hover {
+    color: white;
+
+    background:
+        rgba(251, 113, 133, 0.8);
+}
+
+
+/* =========================================================
+   WINDOW CONTENT
+========================================================= */
+
+.window-content {
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding: 28px;
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    margin-bottom: 28px;
+}
+
+
+.profile-avatar {
+    width: 64px;
+    height: 64px;
+
+    display: grid;
+    place-items: center;
+
+    color: #0a0e14;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--gold-light),
+            var(--gold)
+        );
+
+    border-radius: 18px;
+
+    font-family: var(--font-code);
+    font-size: 26px;
+    font-weight: 700;
+
+    box-shadow:
+        0 10px 30px rgba(212, 175, 55, 0.18);
+}
+
+
+.profile-header h2 {
+    font-size: 20px;
+}
+
+
+.profile-header p {
+    margin-top: 4px;
+
+    color: var(--text-muted);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   SPEC GRID
+========================================================= */
+
+.spec-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+}
+
+
+.spec-card {
+    padding: 17px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+}
+
+
+.spec-label {
+    color: var(--text-muted);
+
+    font-family: var(--font-code);
+    font-size: 8px;
+    letter-spacing: 0.08em;
+}
+
+
+.spec-card strong {
+    color: var(--text);
+
+    font-family: var(--font-code);
+    font-size: 13px;
+}
+
+
+.spec-card small {
+    color: var(--text-muted);
+
+    font-size: 10px;
+}
+
+
+.online-text {
+    color: var(--green) !important;
+}
+
+
+/* =========================================================
+   SKILLS
+========================================================= */
+
+.skills-section {
+    margin-top: 28px;
+}
+
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 13px;
+}
+
+
+.section-heading span {
+    color: var(--gold);
+
+    font-family: var(--font-code);
+    font-size: 9px;
+}
+
+
+.section-heading h3 {
+    font-size: 13px;
+}
+
+
+.skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+
+.skill-list span,
+.tech-stack span {
+    padding: 6px 9px;
+
+    color: var(--text-soft);
+
+    background:
+        rgba(255, 255, 255, 0.035);
+
+    border: 1px solid var(--border);
+
+    border-radius: 7px;
+
+    font-family: var(--font-code);
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   PROJECTS
+========================================================= */
+
+.explorer-path {
+    display: flex;
+    gap: 8px;
+
+    margin-bottom: 18px;
+
+    color: var(--text-muted);
+
+    font-family: var(--font-code);
+    font-size: 10px;
+}
+
+
+.explorer-path span:first-child {
+    color: var(--gold);
+}
+
+
+.project-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+
+.project-card {
+    padding: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.045),
+            rgba(255, 255, 255, 0.015)
+        );
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    transition:
+        transform var(--transition),
+        border-color var(--transition);
+}
+
+
+.project-card:hover {
+    transform: translateY(-3px);
+
+    border-color:
+        rgba(212, 175, 55, 0.3);
+}
+
+
+.project-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+
+.project-folder {
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+    place-items: center;
+
+    color: var(--gold);
+
+    background:
+        rgba(212, 175, 55, 0.07);
+
+    border: 1px solid rgba(212, 175, 55, 0.15);
+
+    border-radius: 10px;
+
+    font-family: var(--font-code);
+}
+
+
+.project-status {
+    color: var(--green);
+
+    font-family: var(--font-code);
+    font-size: 8px;
+}
+
+
+.project-card h3 {
+    margin-bottom: 8px;
+
+    font-size: 14px;
+}
+
+
+.project-card p {
+    min-height: 55px;
+
+    color: var(--text-muted);
+
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+
+    margin: 15px 0;
+}
+
+
+.tech-stack span {
+    padding: 4px 6px;
+
+    font-size: 8px;
+}
+
+
+.project-button {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 12px;
+
+    color: var(--gold);
+
+    background:
+        rgba(212, 175, 55, 0.06);
+
+    border: 1px solid rgba(212, 175, 55, 0.15);
+
+    border-radius: 8px;
+
+    font-family: var(--font-code);
+    font-size: 9px;
+
+    transition: background var(--transition);
+}
+
+
+.project-button:hover {
+    background:
+        rgba(212, 175, 55, 0.12);
+}
+
+
+.project-placeholder {
+    opacity: 0.5;
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact-intro {
+    margin-bottom: 25px;
+}
+
+
+.eyebrow {
+    color: var(--gold);
+
+    font-family: var(--font-code);
+    font-size: 8px;
+    letter-spacing: 0.1em;
+}
+
+
+.contact-intro h2 {
+    max-width: 480px;
+
+    margin: 10px 0;
+
+    font-size: clamp(24px, 4vw, 38px);
+    line-height: 1.3;
+}
+
+
+.contact-intro h2 span {
+    color: var(--gold);
+}
+
+
+.contact-intro p {
+    color: var(--text-muted);
+
+    font-size: 12px;
+}
+
+
+.contact-links {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 8px;
+
+    margin-bottom: 20px;
+}
+
+
+.contact-links a {
+    padding: 11px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+
+    color: var(--text-soft);
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    font-family: var(--font-code);
+    font-size: 9px;
+
+    transition:
+        border-color var(--transition),
+        transform var(--transition);
+}
+
+
+.contact-links a:hover {
+    border-color:
+        rgba(212, 175, 55, 0.3);
+
+    transform: translateY(-2px);
+}
+
+
+.contact-links a span {
+    color: var(--gold);
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   CONTACT FORM
+========================================================= */
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    color: var(--text);
+
+    background:
+        rgba(0, 0, 0, 0.2);
+
+    border: 1px solid var(--border);
+
+    border-radius: 9px;
+
+    outline: none;
+
+    font-size: 11px;
+
+    resize: vertical;
+
+    transition:
+        border-color var(--transition);
+}
+
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color:
+        rgba(212, 175, 55, 0.5);
+}
+
+
+.contact-form button {
+    padding: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: #080a0c;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--gold-light),
+            var(--gold)
+        );
+
+    border-radius: 9px;
+
+    font-family: var(--font-code);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   MAXIMIZED WINDOW
+========================================================= */
+
+.app-window.maximized {
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: calc(100% - 0px);
+
+    transform: none;
+
+    border-radius: 0;
+}
+
+
+.app-window.maximized .window-titlebar {
+    cursor: default;
+}
+
+
+/* =========================================================
+   MOBILE WINDOWS
+========================================================= */
+
+@media (max-width: 767px) {
+
+    .app-window {
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        border: 0;
+        border-radius: 0;
+
+        transform: none;
+    }
+
+
+    .app-window.open {
+        animation: mobileWindowOpen 180ms ease;
+    }
+
+
+    @keyframes mobileWindowOpen {
+
+        from {
+            opacity: 0;
+            transform: translateY(15px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+    .window-content {
+        padding: 20px;
+    }
+
+
+    .spec-grid,
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .contact-links {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .app-window.maximized {
+        width: 100%;
+        height: 100%;
+
+        transform: none;
+    }
+}
+
+/* =========================================================
+   FIX: CONTACT WINDOW MAXIMIZED BUG
+========================================================= */
+
+#window-contact.maximized {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    border-radius: 0 !important;
+}
+
+#window-contact.maximized .window-content {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    max-width: 850px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 40px 24px;
+    box-sizing: border-box;
+}
+
+#window-contact.maximized .contact-links {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}

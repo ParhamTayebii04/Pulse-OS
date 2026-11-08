@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pulse OS — Interactive portfolio of Parham.">
+
+    <title>Pulse OS — Parham</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="Base.css">
+    <link rel="stylesheet" href="desktop.css">
+    <link rel="stylesheet" href="windows.css">
+    <link rel="stylesheet" href="terminal.css">
+    <link rel="stylesheet" href="CssIntro.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         PULSE BACKGROUND
+    ====================================================== -->
+    <canvas id="pulseCanvas"></canvas>
+    <div class="background-overlay"></div>
+
+
+    <!-- =====================================================
+         DESKTOP
+    ====================================================== -->
+    <main id="desktop">
+
+        <!-- Desktop Header -->
+        <header class="desktop-header">
+            <div class="system-brand">
+                <span class="brand-pulse"></span>
+                <span>PULSE</span>
+                <small>OS</small>
+            </div>
+
+            <div class="system-status">
+                <span>ONLINE</span>
+                <span class="status-dot"></span>
+            </div>
+        </header>
+
+
+        <!-- =================================================
+             DESKTOP ICONS (MODERN STYLE)
+        ================================================== -->
+        <section class="desktop-icons">
+
+            <button class="desktop-icon" data-app="about" type="button">
+                <div class="app-icon-box blue-glow">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                    </svg>
+                </div>
+                <span>This PC</span>
+            </button>
+
+            <button class="desktop-icon" data-app="projects" type="button">
+                <div class="app-icon-box gold-glow">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                </div>
+                <span>Projects</span>
+            </button>
+
+            <button class="desktop-icon" data-app="terminal" type="button">
+                <div class="app-icon-box cyan-glow">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="4 17 10 11 4 5"></polyline>
+                        <line x1="12" y1="19" x2="20" y2="19"></line>
+                    </svg>
+                </div>
+                <span>Terminal</span>
+            </button>
+
+            <button class="desktop-icon" data-app="contact" type="button">
+                <div class="app-icon-box green-glow">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </div>
+                <span>Contact</span>
+            </button>
+
+            <button class="desktop-icon" data-app="settings" type="button">
+                <div class="app-icon-box blue-glow">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </div>
+                <span>Settings</span>
+            </button>
+
+            <button class="desktop-icon" data-app="game-snake" type="button">
+                <div class="app-icon-box green-glow" style="display: grid; place-items: center; font-size: 20px;">
+                    🐍
+                </div>
+                <span>Snake</span>
+            </button>
+
+            <button class="desktop-icon" data-app="game-tictactoe" type="button">
+                <div class="app-icon-box gold-glow">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </div>
+                <span>Tic-Tac-Toe</span>
+            </button>
+
+            <button class="desktop-icon" data-app="game-guess" type="button">
+                <div class="app-icon-box purple-glow">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <circle cx="12" cy="12" r="6"></circle>
+                        <circle cx="12" cy="12" r="2"></circle>
+                    </svg>
+                </div>
+                <span>Cyber Guess</span>
+            </button>
+
+        </section>
+
+
+        <!-- =================================================
+             WINDOWS (بخش پنجره‌ها بدون تغییر و کاملاً محفوظ)
+        ================================================== -->
+
+        <!-- 1. ABOUT WINDOW -->
+        <section class="app-window" id="window-about" data-window="about">
+            <div class="window-titlebar">
+                <div class="window-title">
+                    <span class="window-icon">💻</span>
+                    <span>This PC</span>
+                </div>
+                <div class="window-controls">
+                    <button class="window-btn minimize" type="button" aria-label="Minimize">−</button>
+                    <button class="window-btn maximize" type="button" aria-label="Maximize">□</button>
+                    <button class="window-btn close" type="button" aria-label="Close">×</button>
+                </div>
+            </div>
+
+            <div class="window-content about-content">
+                <div class="profile-header">
+                    <div class="profile-avatar">P</div>
+                    <div>
+                        <h2>Parham</h2>
+                        <p>Full Stack Developer</p>
+                    </div>
+                </div>
+
+                <div class="spec-grid">
+                    <article class="spec-card">
+                        <span class="spec-label">PROCESSOR</span>
+                        <strong>Parham's Brain</strong>
+                        <small>@ 10.00 GHz</small>
+                    </article>
+
+                    <article class="spec-card">
+                        <span class="spec-label">MEMORY</span>
+                        <strong>32 GB</strong>
+                        <small>Clean Code RAM</small>
+                    </article>
+
+                    <article class="spec-card">
+                        <span class="spec-label">CORE</span>
+                        <strong>JavaScript</strong>
+                        <small>ES6+</small>
+                    </article>
+
+                    <article class="spec-card">
+                        <span class="spec-label">STATUS</span>
+                        <strong class="online-text">AVAILABLE</strong>
+                        <small>Ready to build</small>
+                    </article>
+                </div>
+
+                <div class="skills-section">
+                    <div class="section-heading">
+                        <span>01</span>
+                        <h3>Core Skills</h3>
+                    </div>
+                    <div class="skill-list">
+                        <span>HTML5</span>
+                        <span>CSS3</span>
+                        <span>JavaScript</span>
+                        <span>UI/UX</span>
+                        <span>Responsive Design</span>
+                        <span>Git</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 2. PROJECTS WINDOW -->
+        <section class="app-window" id="window-projects" data-window="projects">
+            <div class="window-titlebar">
+                <div class="window-title">
+                    <span class="window-icon">📁</span>
+                    <span>Projects</span>
+                </div>
+                <div class="window-controls">
+                    <button class="window-btn minimize" type="button">−</button>
+                    <button class="window-btn maximize" type="button">□</button>
+                    <button class="window-btn close" type="button">×</button>
+                </div>
+            </div>
+
+            <div class="window-content projects-content">
+                <div class="explorer-path">
+                    <span>~/</span>
+                    <span>projects</span>
+                    <span>/</span>
+                </div>
+
+                <div class="project-grid">
+                    <article class="project-card">
+                        <div class="project-top">
+                            <div class="project-folder">📁</div>
+                            <span class="project-status">LIVE</span>
+                        </div>
+                        <h3>Vira Elevator Mazandaran</h3>
+                        <p>A modern Persian RTL website for an elevator engineering company in Mazandaran.</p>
+                        <div class="tech-stack">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                            <span>Three.js</span>
+                        </div>
+                        <a class="project-button" href="#" target="_blank" rel="noopener noreferrer">
+                            Live Preview <span>↗</span>
+                        </a>
+                    </article>
+
+                    <article class="project-card project-placeholder">
+                        <div class="project-top">
+                            <div class="project-folder">+</div>
+                            <span>SOON</span>
+                        </div>
+                        <h3>Next Project</h3>
+                        <p>Something new is currently being engineered.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 3. TERMINAL WINDOW -->
+        <section class="app-window terminal-window" id="window-terminal" data-window="terminal">
+            <div class="window-titlebar terminal-titlebar">
+                <div class="window-title">
+                    <span class="window-icon">&gt;_</span>
+                    <span>Dev Terminal</span>
+                </div>
+                <div class="window-controls">
+                    <button class="window-btn minimize" type="button">−</button>
+                    <button class="window-btn maximize" type="button">□</button>
+                    <button class="window-btn close" type="button">×</button>
+                </div>
+            </div>
+
+            <div class="terminal-body">
+                <div class="terminal-output" id="terminalOutput">
+                    <div class="terminal-line"><span class="terminal-green">PULSE OS v1.0.0</span></div>
+                    <div class="terminal-line">System initialized successfully.</div>
+                    <br>
+                    <div class="terminal-line">Type <span class="terminal-command">help</span> to see available commands.</div>
+                </div>
+
+                <form class="terminal-form" id="terminalForm">
+                    <span class="terminal-prompt">parham@pulse:~$</span>
+                    <input id="terminalInput" type="text" autocomplete="off" spellcheck="false" aria-label="Terminal command">
+                </form>
+            </div>
+        </section>
+
+
+        <!-- 4. CONTACT WINDOW -->
+        <section class="app-window" id="window-contact" data-window="contact">
+            <div class="window-titlebar">
+                <div class="window-title">
+                    <span class="window-icon">✉</span>
+                    <span>Contact</span>
+                </div>
+                <div class="window-controls">
+                    <button class="window-btn minimize" type="button">−</button>
+                    <button class="window-btn maximize" type="button">□</button>
+                    <button class="window-btn close" type="button">×</button>
+                </div>
+            </div>
+
+            <div class="window-content contact-content">
+                <div class="contact-intro">
+                    <span class="eyebrow">ESTABLISH CONNECTION</span>
+                    <h2>Let's build something <span>great.</span></h2>
+                    <p>Have an idea, project, or just want to talk about technology?</p>
+                </div>
+
+                <div class="contact-links">
+                    <a href="#" target="_blank" rel="noopener noreferrer"><span>GH</span> GitHub</a>
+                    <a href="#" target="_blank" rel="noopener noreferrer"><span>in</span> LinkedIn</a>
+                    <a href="#" target="_blank" rel="noopener noreferrer"><span>✈</span> Telegram</a>
+                    <a href="mailto:hello@example.com"><span>@</span> Email</a>
+                </div>
+
+                <form class="contact-form" id="contactForm">
+                    <input type="text" name="name" placeholder="Your name" required>
+                    <input type="email" name="email" placeholder="Your email" required>
+                    <textarea name="message" placeholder="Your message..." rows="4" required></textarea>
+                    <button type="submit">Send Message <span>→</span></button>
+                </form>
+            </div>
+        </section>
+
+
+        <!-- 5. SETTINGS WINDOW (CONTROL CENTER) -->
+        <section class="app-window" id="window-settings" data-window="settings">
+            <div class="window-titlebar">
+                <div class="window-title">
+                    <span class="window-icon">⚙</span>
+                    <span>Control Center</span>
+                </div>
+                <div class="window-controls">
+                    <button class="window-btn minimize" type="button">−</button>
+                    <button class="window-btn maximize" type="button">□</button>
+                    <button class="window-btn close" type="button">×</button>
+                </div>
+            </div>
+
+            <div class="window-content settings-content">
+                <div class="section-heading">
+                    <span>01</span>
+                    <h3>System Themes</h3>
+                </div>
+                <p style="color: var(--text-muted); font-size: 11px; margin-bottom: 20px;">
+                    Select your preferred visual interface skin.
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+                    <button class="theme-btn" data-theme="gold" style="padding: 14px; background: rgba(212,175,55,0.1); border: 1px solid var(--border-gold); border-radius: 10px; color: #d4af37; font-family: var(--font-code); cursor: pointer; font-size: 10px;">
+                        Gold Classic
+                    </button>
+                    <button class="theme-btn" data-theme="light" style="padding: 14px; background: rgba(37,99,235,0.1); border: 1px solid rgba(37,99,235,0.3); border-radius: 10px; color: #2563eb; font-family: var(--font-code); cursor: pointer; font-size: 10px;">
+                        Light Minimal
+                    </button>
+                    <button class="theme-btn" data-theme="oled" style="padding: 14px; background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 10px; color: #ffffff; font-family: var(--font-code); cursor: pointer; font-size: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);">
+                        Pure OLED Dark
+                    </button>
+                    <button class="theme-btn" data-theme="matrix" style="padding: 14px; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); border-radius: 10px; color: #34d399; font-family: var(--font-code); cursor: pointer; font-size: 10px;">
+                        Matrix Green
+                    </button>
+                    <button class="theme-btn" data-theme="cyber" style="padding: 14px; background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3); border-radius: 10px; color: #38bdf8; font-family: var(--font-code); cursor: pointer; font-size: 10px;">
+                        Cyber Neon
+                    </button>
+                    <button class="theme-btn" data-theme="crimson" style="padding: 14px; background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.3); border-radius: 10px; color: #f43f5e; font-family: var(--font-code); cursor: pointer; font-size: 10px;">
+                        Sunset Crimson
+                    </button>
+                    <button class="theme-btn" data-theme="violet" style="padding: 14px; background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.3); border-radius: 10px; color: #a855f7; font-family: var(--font-code); cursor: pointer; font-size: 10px;">
+                        Space Violet
+                    </button>
+                    <button class="theme-btn" data-theme="pure-dark" style="padding: 14px; background: rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; color: #ffffff; font-family: var(--font-code); cursor: pointer; font-size: 10px;">
+                        Pure Minimal (No BG)
+                    </button>
+                    
+                    <button class="theme-btn" data-theme="win7" style="padding: 14px; background: rgba(0, 120, 215, 0.2); border: 1px solid #0078d7; border-radius: 10px; color: #60a5fa; font-family: var(--font-code); cursor: pointer; font-size: 10px;">
+                        Windows 7 Aero
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 6. SNAKE GAME WINDOW -->
+        <section class="app-window" id="window-game-snake" data-window="game-snake">
+            <div class="window-titlebar">
+                <div class="window-title">
+                    <span class="window-icon">🐍</span>
+                    <span>Retro Snake Game</span>
+                </div>
+                <div class="window-controls">
+                    <button class="window-btn minimize" type="button">−</button>
+                    <button class="window-btn maximize" type="button">□</button>
+                    <button class="window-btn close" type="button">×</button>
+                </div>
+            </div>
+            <div class="window-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: #020408;">
+                <div style="font-family: var(--font-code); font-size: 12px; color: var(--gold); margin-bottom: 10px;">
+                    Score: <span id="snakeScore">0</span> | Use Arrow Keys
+                </div>
+                <canvas id="snakeCanvas" width="300" height="300" style="border: 1px solid var(--border-gold); border-radius: 8px; background: #05080c;"></canvas>
+                <button id="snakeStartBtn" style="margin-top: 12px; padding: 8px 16px; background: rgba(212,175,55,0.15); border: 1px solid var(--border-gold); color: var(--gold); border-radius: 6px; cursor: pointer; font-family: var(--font-code); font-size: 10px;">
+                    Start / Restart
+                </button>
+            </div>
+        </section>
+
+
+        <!-- 7. TIC-TAC-TOE WINDOW -->
+        <section class="app-window" id="window-game-tictactoe" data-window="game-tictactoe">
+            <div class="window-titlebar">
+                <div class="window-title">
+                    <span class="window-icon">❌</span>
+                    <span>Tic-Tac-Toe</span>
+                </div>
+                <div class="window-controls">
+                    <button class="window-btn minimize" type="button">−</button>
+                    <button class="window-btn maximize" type="button">□</button>
+                    <button class="window-btn close" type="button">×</button>
+                </div>
+            </div>
+            <div class="window-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div id="tttStatus" style="font-family: var(--font-code); font-size: 12px; color: var(--text-soft); margin-bottom: 15px;">
+                    Player X Turn
+                </div>
+                <div id="tttBoard" style="display: grid; grid-template-columns: repeat(3, 75px); gap: 8px;">
+                    <button class="ttt-cell" data-index="0" style="width: 75px; height: 75px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; font-size: 26px; color: var(--text); cursor: pointer; font-family: var(--font-code);"></button>
+                    <button class="ttt-cell" data-index="1" style="width: 75px; height: 75px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; font-size: 26px; color: var(--text); cursor: pointer; font-family: var(--font-code);"></button>
+                    <button class="ttt-cell" data-index="2" style="width: 75px; height: 75px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; font-size: 26px; color: var(--text); cursor: pointer; font-family: var(--font-code);"></button>
+                    <button class="ttt-cell" data-index="3" style="width: 75px; height: 75px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; font-size: 26px; color: var(--text); cursor: pointer; font-family: var(--font-code);"></button>
+                    <button class="ttt-cell" data-index="4" style="width: 75px; height: 75px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; font-size: 26px; color: var(--text); cursor: pointer; font-family: var(--font-code);"></button>
+                    <button class="ttt-cell" data-index="5" style="width: 75px; height: 75px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; font-size: 26px; color: var(--text); cursor: pointer; font-family: var(--font-code);"></button>
+                    <button class="ttt-cell" data-index="6" style="width: 75px; height: 75px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; font-size: 26px; color: var(--text); cursor: pointer; font-family: var(--font-code);"></button>
+                    <button class="ttt-cell" data-index="7" style="width: 75px; height: 75px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; font-size: 26px; color: var(--text); cursor: pointer; font-family: var(--font-code);"></button>
+                    <button class="ttt-cell" data-index="8" style="width: 75px; height: 75px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; font-size: 26px; color: var(--text); cursor: pointer; font-family: var(--font-code);"></button>
+                </div>
+                <button id="tttReset" style="margin-top: 15px; padding: 8px 16px; background: rgba(212,175,55,0.15); border: 1px solid var(--border-gold); color: var(--gold); border-radius: 6px; cursor: pointer; font-family: var(--font-code); font-size: 10px;">
+                    Reset Game
+                </button>
+            </div>
+        </section>
+
+
+        <!-- 8. CYBER GUESS WINDOW -->
+        <section class="app-window" id="window-game-guess" data-window="game-guess">
+            <div class="window-titlebar">
+                <div class="window-title">
+                    <span class="window-icon">🎯</span>
+                    <span>Cyber Passcode Hack</span>
+                </div>
+                <div class="window-controls">
+                    <button class="window-btn minimize" type="button">−</button>
+                    <button class="window-btn maximize" type="button">□</button>
+                    <button class="window-btn close" type="button">×</button>
+                </div>
+            </div>
+            <div class="window-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                <p style="font-family: var(--font-code); font-size: 11px; color: var(--text-soft); margin-bottom: 15px;">
+                    Guess the 2-digit system passcode (1 - 50):
+                </p>
+                <div id="guessMessage" style="font-family: var(--font-code); font-size: 13px; color: var(--gold); margin-bottom: 12px; min-height: 20px;">
+                    System locked. Enter passcode.
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <input type="number" id="guessInput" min="1" max="50" placeholder="1-50" style="padding: 10px; width: 100px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-align: center; font-family: var(--font-code);">
+                    <button id="guessBtn" style="padding: 10px 16px; background: var(--gold); color: #000; border-radius: 8px; font-weight: bold; cursor: pointer; font-family: var(--font-code); font-size: 10px;">
+                        HACK
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+<!-- =====================================================
+         TASKBAR
+    ====================================================== -->
+    <nav class="taskbar">
+        <div class="taskbar-left">
+            <div class="pulse-start-wrapper" style="position: relative;">
+                <button id="startMenuBtn" class="pulse-logo" type="button" title="Start Menu" style="cursor: pointer; display: grid; place-items: center; width: 40px; height: 40px;">
+                    <!-- آیکون ۴ مربعی سبک ویندوز ۱۱ -->
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="3" y="3" width="8.5" height="8.5" rx="1.5" fill="var(--cyan)" />
+                        <rect x="12.5" y="3" width="8.5" height="8.5" rx="1.5" fill="var(--cyan)" />
+                        <rect x="3" y="12.5" width="8.5" height="8.5" rx="1.5" fill="var(--cyan)" />
+                        <rect x="12.5" y="12.5" width="8.5" height="8.5" rx="1.5" fill="var(--gold)" />
+                    </svg>
+                </button>
+
+                <!-- منوی پاور کلیکی -->
+                <div id="startPowerMenu" class="start-power-menu hidden">
+                    <div class="start-menu-header">PULSE OS POWER</div>
+                    
+                    <button id="restartSysBtn" type="button" class="power-item">
+                        <span>🔄</span>
+                        <span>Restart System</span>
+                    </button>
+                    
+                    <button id="shutdownSysBtn" type="button" class="power-item danger">
+                        <span>⏻</span>
+                        <span>Shut Down</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="taskbar-apps">
+            <!-- This PC -->
+            <button class="taskbar-app" data-app="about" type="button" title="This PC">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+            </button>
+            <!-- Projects -->
+            <button class="taskbar-app" data-app="projects" type="button" title="Projects">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                </svg>
+            </button>
+            <!-- Terminal -->
+            <button class="taskbar-app" data-app="terminal" type="button" title="Terminal">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="4 17 10 11 4 5"></polyline>
+                    <line x1="12" y1="19" x2="20" y2="19"></line>
+                </svg>
+            </button>
+            <!-- Contact -->
+            <button class="taskbar-app" data-app="contact" type="button" title="Contact">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+            </button>
+            <!-- Settings -->
+            <button class="taskbar-app" data-app="settings" type="button" title="Settings">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+            </button>
+            <!-- Snake (بازگردانده شده به ایموجی استثنایی مار) -->
+            <button class="taskbar-app" data-app="game-snake" type="button" title="Snake Game">🐍</button>
+            <!-- Tic-Tac-Toe -->
+            <button class="taskbar-app" data-app="game-tictactoe" type="button" title="Tic-Tac-Toe">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <!-- Cyber Guess -->
+            <button class="taskbar-app" data-app="game-guess" type="button" title="Cyber Guess">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <circle cx="12" cy="12" r="6"></circle>
+                    <circle cx="12" cy="12" r="2"></circle>
+                </svg>
+            </button>
+        </div>
+
+        <div class="taskbar-right">
+            <div class="connection-status">
+                <span></span>
+                ONLINE
+            </div>
+            <time id="systemClock">00:00</time>
+        </div>
+    </nav>
+
+
+    <!-- First-Time User Guide -->
+    <div id="pulseGuide" class="pulse-guide" aria-hidden="true">
+        <div class="pulse-guide__card">
+            <button id="pulseGuideClose" class="pulse-guide__close" type="button" aria-label="Close guide">×</button>
+            <div class="pulse-guide__icon">⌁</div>
+            <h2>Welcome to Pulse</h2>
+            <p>Pulse is an interactive desktop portfolio.</p>
+            <ul>
+                <li><strong>Double-click</strong> desktop icons to open apps.</li>
+                <li>Drag windows using their title bars.</li>
+                <li>Open <strong>Projects</strong> to see my work.</li>
+                <li>Open <strong>Settings</strong> to customize themes.</li>
+            </ul>
+            <button id="pulseGuideGotIt" class="pulse-guide__button" type="button">Got it</button>
+        </div>
+    </div>
+
+    <div id="boot-intro" aria-hidden="true"></div>
+
+
+    <!-- JavaScript -->
+    <script src="PulseBG.js"></script>
+    <script src="OS.js"></script>
+    <script src="terminalcommands.js"></script>
+    <script src="Main.js"></script>
+    <script src="intro.js" defer></script>
+
+</body>
+</html>
